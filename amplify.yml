@@ -1,0 +1,28 @@
+version: 1
+env:
+  variables:
+    NEXT_PUBLIC_WEBAPP_URL: http://localhost:3000
+    NEXTAUTH_URL: http://localhost:3000
+    CALCOM_TELEMETRY_DISABLED: 1
+backend:
+  phases:
+    build:
+      commands:
+        - amplifyPush --simple
+frontend:
+  phases:
+    preBuild:
+      commands:
+          # Install dependencies
+        - yarn
+    build:
+      commands:
+        - yarn build
+  artifacts:
+    baseDirectory: apps/web/.next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - apps/web/.next/cache/**
