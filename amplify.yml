@@ -17,6 +17,8 @@ frontend:
         - yarn
     build:
       commands:
+        - env | grep -e NEXT_PUBLIC_ >> .env
+        - env | grep -e NEXTAUTH_URL >> .env
         - yarn build
   artifacts:
     baseDirectory: apps/web/.next
